@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Is my Flush good enough?</title>
+</head>
+
+<body>
+
+    <h1>Select five cards</h1>
+
+    <form action="">
+        <label for="Ace">Ace</label>
+        <input type="checkbox" name="Ace" value=11>
+        <br>
+        <label for="King">King</label>
+        <input type="checkbox" name="King" value=10>
+        <br>
+        <label for="Queen">Queen</label>
+        <input type="checkbox" name="Queen" value=10>
+        <br>
+        <label for="Jack">Jack</label>
+        <input type="checkbox" name="Jack" value=10">
+        <br>
+        <label for="10">10</label>
+        <input type="checkbox" name="10" value=10>
+        <br>
+        <label for="9">9</label>
+        <input type="checkbox" name="9" value=9>
+        <br>
+        <label for="8">8</label>
+        <input type="checkbox" name="8" value=8>
+        <br>
+        <label for="7">7</label>
+        <input type="checkbox" name="7" value=7>
+        <br>
+        <label for="6">6</label>
+        <input type="checkbox" name="6" value=6>
+        <br>
+        <label for="5">5</label>
+        <input type="checkbox" name="5" value=5>
+        <br>
+        <label for="4">4</label>
+        <input type="checkbox" name="4" value=4>
+        <br>
+        <label for="3">3</label>
+        <input type="checkbox" name="3" value=3>
+        <br>
+        <label for="2">2</label>
+        <input type="checkbox" name="2" value=2>
+        <br>
+        <input type="submit" value="Check flush">
+
+</body>
+
+<script>
+    // const straights = [[2, 3, 4, 5, 6], [3, 4, 5, 6, 7], [4, 5, 6, 7, 8], [5, 6, 7, 8, 9], [6, 7, 8, 9, 10], [7, 8, 9, 10, 10], [8, 9, 10, 10, 10], [9, 10, 10, 10, 10], [10, 10, 10, 10, 10], [11, 2, 3, 4, 5]];
+    const form = document.querySelector('form');
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const formData = new FormData(form);
+        const values = Array.from(formData.values());
+        // if(straights.find(values => values.every((value, index) => value === values[0] + index))) {
+        //     alert('This is a straight flush!');
+        //     return;
+        // }
+        if (values.length !== 5) {
+            alert("You must select 5 cards.");
+            return;
+        }
+        const sum = values.reduce((acc, value) => acc + parseInt(value), 0);
+        if (sum >= 40) {
+            alert('This flush is good enough!');
+        } else {
+            alert('This flush will not score enough points.');
+        }
+    });
+</script>
+
+</html>
