@@ -5,11 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Is my Flush good enough?</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+    </style>
 </head>
 
 <body>
 
-    <h1>Select five cards</h1>
+    <h1>Is my flush good enough?</h1>
+
+    <p>Select the five cards you're playing and then click the button to check if you have enough value. Remember, you need at least 40 chips from the cards you play to clear the first round in one hand (or just any straight flush).
+    </p>
+
 
     <form action="">
         <label for="Ace">Ace</label>
@@ -56,26 +65,24 @@
 </body>
 
 <script>
-    // const straights = [[2, 3, 4, 5, 6], [3, 4, 5, 6, 7], [4, 5, 6, 7, 8], [5, 6, 7, 8, 9], [6, 7, 8, 9, 10], [7, 8, 9, 10, 10], [8, 9, 10, 10, 10], [9, 10, 10, 10, 10], [10, 10, 10, 10, 10], [11, 2, 3, 4, 5]];
+    //These are the straights that don't add up to at least 40
+    const straights = [[2, 3, 4, 5, 6], [3, 4, 5, 6, 7], [4, 5, 6, 7, 8], [5, 6, 7, 8, 9], [11, 2, 3, 4, 5]];
     const form = document.querySelector('form');
     form.addEventListener('submit', (event) => {
         event.preventDefault();
         const formData = new FormData(form);
         const values = Array.from(formData.values());
-        // if(straights.find(values => values.every((value, index) => value === values[0] + index))) {
-        //     alert('This is a straight flush!');
-        //     return;
-        // }
         if (values.length !== 5) {
             alert("You must select 5 cards.");
             return;
         }
         const sum = values.reduce((acc, value) => acc + parseInt(value), 0);
-        if (sum >= 40) {
-            alert('This flush is good enough!');
+        if (sum >= 40 || !!straights.find(straight => values.every(card => straight.includes(parseInt(card))))) {
+            alert('This hand is good enough!');
         } else {
-            alert('This flush will not score enough points.');
+            alert('This hand will not score enough points.');
         }
+        form.reset();
     });
 </script>
 
